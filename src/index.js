@@ -3,15 +3,15 @@ import data from './data'
 const fromPlanet = 'planet-a'
 var bestTravel = { path: [], profit: 0 }
 
-const getBuyPricesByPlanetFromData = (planet, data) => {
-    return getActionKeysPricesByPlanetFromData(planet, 'buy', data)
+const getBuyPricesForPlanetFromData = (planet, data) => {
+    return getActionKeysPricesForPlanetFromData(planet, 'buy', data)
 }
 
-const getSellPricesByPlanetFromData = (planet, data) => {
-    return getActionKeysPricesByPlanetFromData(planet, 'sell', data)
+const getSellPricesForPlanetFromData = (planet, data) => {
+    return getActionKeysPricesForPlanetFromData(planet, 'sell', data)
 }
 
-const getActionKeysPricesByPlanetFromData = (planet, actionKey, data) => {
+const getActionKeysPricesForPlanetFromData = (planet, actionKey, data) => {
     const planetResourcesPrices = data[planet]
     const appendResourceBuyPrice = (final, currentResource) => ({
             ...final, 
@@ -47,8 +47,8 @@ const getAllTravelProfit = (currentPlanetName, jumps, jumpCounter, previousPath,
     
     const getProfitByPlanetObject = (final, planetDestinationName) => {
 
-        const buyPrices = getBuyPricesByPlanetFromData(currentPlanetName, data)
-        const sellPrices = getSellPricesByPlanetFromData(planetDestinationName, data)
+        const buyPrices = getBuyPricesForPlanetFromData(currentPlanetName, data)
+        const sellPrices = getSellPricesForPlanetFromData(planetDestinationName, data)
         
         return {
             ...final,
