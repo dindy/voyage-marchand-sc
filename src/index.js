@@ -94,6 +94,7 @@ const getAllTravelProfit = (currentPlanetName, jumps, jumpCounter, previousPath,
         return Object
             .keys(destinations)
             .reduce((final, planetDestinationName) => {
+
                 const allTravelProfits = getAllTravelProfit(
                     planetDestinationName, 
                     jumps, 
@@ -106,21 +107,19 @@ const getAllTravelProfit = (currentPlanetName, jumps, jumpCounter, previousPath,
                     .filter( key => key !== 'transaction' )
                     .forEach( key => {
 
-                        const globalProfit = typeof allTravelProfits[key]['globalProfit'] === "undefined" ?
-                            allTravelProfits[key]['transaction']['globalProfit'] : 
-                            allTravelProfits[key]['globalProfit']
+                        const transaction = typeof allTravelProfits[key].transaction === 'undefined' ?
+                            allTravelProfits[key] :
+                            allTravelProfits[key].transaction
 
-                        const path = typeof allTravelProfits[key]['path'] === "undefined" ?
-                            allTravelProfits[key]['transaction']['path'] : 
-                            allTravelProfits[key]['path']
-                        
+                        const globalProfit = transaction.globalProfit
+                        const path = transaction.path
+
                         if (globalProfit > bestTravel['profit']) {
                             bestTravel = {
                                 path,
                                 profit: globalProfit
                             }
                         }
-                        
                     })
 
                 const knownDestinations = {
@@ -138,7 +137,7 @@ const getAllTravelProfit = (currentPlanetName, jumps, jumpCounter, previousPath,
     
 }
 
-let allTravelProfit = getAllTravelProfit(fromPlanet, 9, 1, [])
+let allTravelProfit = getAllTravelProfit(fromPlanet, 6, 1, [])
 
 bestTravel.path
     .reduce((final, planetName) => {
